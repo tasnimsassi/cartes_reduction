@@ -1,0 +1,21 @@
+<odoo>
+    <record id="action_voir_statistiques_utilisation" model="ir.actions.act_window">
+    <field name="name">Voir les statistiques d’utilisation</field>
+    <field name="res_model">rapports.usage</field>
+    <field name="view_mode">graph,tree</field>
+    <field name="context">{}</field>
+</record>
+<record id="action_exporter_donnees" model="ir.actions.act_window">
+    <field name="name">Exporter les données</field>
+    <field name="res_model">rapports.usage</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+</record>
+<record id="action_analyse_tendances" model="ir.actions.act_window">
+    <field name="name">Analyse des tendances de consommation</field>
+    <field name="res_model">rapports.usage</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+</record>
+
+</odoo>

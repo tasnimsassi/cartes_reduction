@@ -1,0 +1,28 @@
+<odoo>
+  <!-- 1. Vue graphique -->
+  <record id="view_dashboard_vente_graph" model="ir.ui.view">
+    <field name="name">dashboard.vente.graph</field>
+    <field name="model">sale.order.line</field>
+    <field name="arch" type="xml">
+      <graph string="Produits les plus vendus" type="bar">
+        <field name="product_id"/>
+        <field name="product_uom_qty" type="measure"/>
+      </graph>
+    </field>
+  </record>
+
+  <!-- 2. Action avec domaine pour exclure les produits fidélité -->
+  <record id="action_dashboard_vente_graph" model="ir.actions.act_window">
+    <field name="name">Top Produits Vendus</field>
+    <field name="res_model">sale.order.line</field>
+    <field name="view_mode">graph</field>
+    <field name="view_id" ref="view_dashboard_vente_graph"/>
+    <field name="domain">[('is_loyalty_line', '=', False)]</field>
+  </record>
+
+  <!-- 3. Menu -->
+  <menuitem id="menu_dashboard_vente_root" name="Dashboard Vente" sequence="10"/>
+  <menuitem id="menu_dashboard_vente_graph" name="Top Produits"
+            parent="menu_dashboard_vente_root"
+            action="action_dashboard_vente_graph"/>
+</odoo>

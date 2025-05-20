@@ -1,0 +1,164 @@
+<odoo>
+    <!-- Vue Graphique -->
+    <record id="view_dashboard_purchase_by_customer_graph" model="ir.ui.view">
+        <field name="name">dashboard.purchase.by.customer.graph</field>
+        <field name="model">dashboard.purchase.by.customer</field>
+    <field name="arch" type="xml">
+    <graph string="Quantité Achetée par Client et Produit" type="bar">
+      <field name="partner_name"/>
+      <field name="total_qty" type="measure"/>
+      <field name="product_id" type="row"/>
+    </graph>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_dashboard_purchase_by_customer" model="ir.actions.act_window">
+        <field name="name">Quantité des Produits Achétés par Client</field>
+        <field name="res_model">dashboard.purchase.by.customer</field>
+        <field name="domain">
+            [('product_id.name', '!=', 'Recharger le e-wallet'),
+            ('product_id.default_code', '!=', 'EWALLET')]
+         </field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_dashboard_purchase_by_customer_graph"/>
+
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_dashboard_purchase_by_customer"
+              name="Quantité des Produits par Client"
+              parent="menu_dashboard_vente_root"
+              action="action_dashboard_purchase_by_customer"
+              sequence="40"/>
+
+<!-- views/res_partner_views.xml -->
+<record id="view_partner_form_enhanced" model="ir.ui.view">
+    <field name="name">res.partner.form.enhanced</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <!-- Ajout d'un onglet "Analyse Comportementale" -->
+        <xpath expr="//notebook" position="inside">
+            <page string="Analyse Comportementale">
+                <group>
+                    <group string="Statistiques">
+                        <field name="total_sales"/>
+                        <field name="avg_purchase_value"/>
+                        <field name="purchase_frequency"/>
+                        <field name="last_purchase_date"/>
+                    </group>
+                    <group string="Segmentation">
+                        <field name="customer_segment" widget="badge" options="{'color_field': 'segment_color'}"/>
+                        <field name="is_vip" widget="boolean_favorite"/>
+                        <field name="rfm_score"/>
+                        <field name="recency_score" widget="progressbar" options="{'max_value': 5}"/>
+                        <field name="frequency_score" widget="progressbar" options="{'max_value': 5}"/>
+                        <field name="monetary_score" widget="progressbar" options="{'max_value': 5}"/>
+                    </group>
+                </group>
+                    <group string="Prédictions">
+                        <field name="predicted_clv" widget="monetary"/>
+                        <field name="churn_probability" widget="percentage"/>
+                        <field name="next_purchase_prediction"/>
+                        <button name="update_behavior_analysis" string="Recalculer" type="object" class="btn-primary"/>
+                        <button name="action_test_cron"
+                            type="object"
+                            string="Tester la prédiction"
+                            class="btn-primary"/>
+                    </group>
+            </page>
+            <page string="Cartes et Promotions">
+                <field name="cartes_attribution_ids" mode="tree,form">
+                    <tree>
+
+                        <field name="date_attribution"/>
+                        <field name="date_expiration"/>
+                        <field name="state"/>
+                    </tree>
+                </field>
+            </page>
+        </xpath>
+    </field>
+</record>
+<record id="view_customer_behavior_graph" model="ir.ui.view">
+    <field name="name">customer.behavior.graph</field>
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+        <graph string="Comportement des Clients" type="bar">
+            <field name="customer_segment" type="row"/>
+            <field name="predicted_clv" type="measure"/>
+            <field name="rfm_score" type="measure"/>
+            <field name="churn_probability" type="measure"/>
+        </graph>
+    </field>
+</record>
+<record id="action_customer_behavior_dashboard" model="ir.actions.act_window">
+    <field name="name">Analyse des Clients</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">graph</field>
+    <field name="context">{}</field>
+</record>
+
+
+
+<record id="action_view_partner_form_enhanced" model="ir.actions.act_window">
+    <field name="name">Analyse Client</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_partner_form_enhanced"/>
+
+</record>
+
+<!-- Vue Liste pour les Associations de Produits -->
+<record id="view_product_association_tree" model="ir.ui.view">
+    <field name="name">product.association.tree</field>
+    <field name="model">product.association</field>
+    <field name="arch" type="xml">
+        <tree string="Associations de Produits">
+            <field name="antecedent_product_ids" widget="many2many_tags" string="Produits de base"/>
+            <field name="associated_product_id"/>
+            <field name="confidence"/>
+            <field name="support"/>
+            <field name="card_id"/>
+        </tree>
+    </field>
+</record>
+
+<!-- Action pour afficher les associations de produits -->
+<record id="action_product_association" model="ir.actions.act_window">
+    <field name="name">Associations de Produits</field>
+    <field name="res_model">product.association</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_product_association_tree"/>
+</record>
+
+<record id="view_product_association_generator_form" model="ir.ui.view">
+    <field name="name">product.association.generator.form</field>
+    <field name="model">product.association.generator</field>
+    <field name="arch" type="xml">
+        <form string="Générateur de règles d'association">
+            <header>
+                <button name="generate_association_rules" string="Générer les règles"
+                        type="object" class="btn-primary"/>
+            </header>
+            <sheet>
+                <p>Appuyez sur le bouton pour générer des règles d'association.</p>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="action_product_association_generator" model="ir.actions.act_window">
+    <field name="name">Générateur de règles</field>
+    <field name="res_model">product.association.generator</field>
+    <field name="view_mode">form</field>
+    <field name="target">current</field>
+</record>
+
+
+
+
+
+
+</odoo>

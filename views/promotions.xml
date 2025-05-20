@@ -1,0 +1,31 @@
+<odoo>
+
+    <record id="action_loyalty_program" model="ir.actions.act_window">
+        <field name="name">Ajouter une Promotion</field>
+        <field name="res_model">loyalty.program</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="loyalty_program_view_form_inherit"/> <!-- Référence à la vue héritée -->
+        <field name="target">current</field>
+    </record>
+
+<record id="action_gestion_reductions" model="ir.actions.act_window">
+    <field name="name">Gérer les Réductions</field>
+    <field name="res_model">cartes.promotions</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<record id="action_promotions_en_cours" model="ir.actions.act_window">
+    <field name="name">Promotions en Cours</field>
+    <field name="res_model">cartes.promotions</field>
+    <field name="domain">[('state', '=', 'en_cours')]</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<record id="action_planifier_promotions" model="ir.actions.act_window">
+    <field name="name">Planifier Promotions Futures</field>
+    <field name="res_model">cartes.promotions</field>
+    <field name="domain">[('state', '=', 'planifiee')]</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+</odoo>

@@ -1,0 +1,89 @@
+<odoo>
+    <record id="action_rappels_automatiques" model="ir.actions.act_window">
+    <field name="name">Rappels automatiques</field>
+    <field name="res_model">notifications.client</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+</record>
+     <!-- Hnotification client -->
+    <record id="view_notification_client_tree" model="ir.ui.view">
+    <field name="name">notifications.client.tree</field>
+    <field name="model">notifications.client</field>
+    <field name="arch" type="xml">
+        <tree string="Notifications Clients">
+            <field name="name"/>
+            <field name="client_id"/>
+            <field name="date"/>
+        </tree>
+    </field>
+</record>
+
+<record id="view_notification_client_form" model="ir.ui.view">
+    <field name="name">notifications.client.form</field>
+    <field name="model">notifications.client</field>
+    <field name="arch" type="xml">
+        <form string="Notification Client">
+            <group>
+                <field name="name"/>
+                <field name="message"/>
+                <field name="client_id"/>
+                <field name="date"/>
+            </group>
+        </form>
+    </field>
+</record>
+
+<record id="action_notification_client" model="ir.actions.act_window">
+    <field name="name">Notifications Clients</field>
+    <field name="res_model">notifications.client</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('name','=ilike','Email%')]</field>
+    <field name="help" type="html">
+        <p>Vous pouvez consulter ici toutes les notifications envoyées aux clients VIP.</p>
+    </field>
+</record>
+
+<record id="view_expired_cards_tree" model="ir.ui.view">
+    <field name="name">expired.cards.tree</field>
+    <field name="model">notifications.client</field>
+    <field name="arch" type="xml">
+        <tree string="Cartes Expirées">
+            <field name="name"/>
+            <field name="client_id"/>
+            <field name="date"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_alertes_cartes_inactives" model="ir.actions.act_window">
+    <field name="name">Alertes Cartes Inactives</field>
+    <field name="res_model">notifications.client</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('name','=ilike','Carte%')]</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Aucune notification encore envoyée.
+        </p>
+    </field>
+</record>
+
+
+<record id="action_envoi_newsletters" model="ir.actions.act_window">
+    <field name="name">Envoi de newsletters promotionnelles</field>
+    <field name="res_model">notifications.client</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+</record>
+
+<record id="ir_cron_check_expired_cards" model="ir.cron">
+    <field name="name">Vérification des cartes expirées</field>
+    <field name="model_id" ref="model_cartes_attribution"/>
+    <field name="state">code</field>
+    <field name="code">model._cron_check_expired_cards()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="doall" eval="False"/>
+</record>
+
+</odoo>

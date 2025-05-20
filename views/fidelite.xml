@@ -1,0 +1,92 @@
+  <odoo>
+
+       <!-- Action pour afficher la vue héritée des cartes de fidélité -->
+    <record id="action_inherited_loyalty_cards" model="ir.actions.act_window">
+        <field name="name">Loyalty Cards</field>
+        <field name="res_model">loyalty.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="inherited_loyalty_card_view_form"/>  <!-- Référence à la vue héritée -->
+        <field name="help" type="html">
+            <h1>No Coupons Found</h1>
+            <p>There haven't been any coupons generated yet.</p>
+        </field>
+    </record>
+
+       <record id="action_gestion_points" model="ir.actions.act_window">
+    <field name="name">Gérer les points de fidélité</field>
+    <field name="res_model">loyalty.program</field>
+    <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="my_custom_gift_ewallet_view_form"/>
+        </record>
+
+<record id="action_loyalty_program_view_tree" model="ir.actions.act_window">
+    <field name="name">Loyalty Program</field>
+    <field name="res_model">loyalty.program</field>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="loyalty_program_view_tree_inherit"/>
+</record>
+
+<record id="action_echanger_points" model="ir.actions.act_window">
+    <field name="name">Échanger des points contre des récompenses</field>
+    <field name="res_model">fidelite.client</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+</record>
+    <record id="action_identification_vip" model="ir.actions.act_window">
+    <field name="name">Identifier les clients VIP</field>
+    <field name="res_model">fidelite.client</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+</record>
+<record id="loyalty_program_gift_ewallet_action" model="ir.actions.act_window">
+    <field name="name">Gift cards &amp; eWallet</field>
+    <field name="res_model">loyalty.program</field>
+    <field name="view_mode">tree,form</field>  <!-- Assurez-vous que "form" est bien dans le view_mode -->
+    <field name="context">{'menu_type': 'gift_ewallet', 'default_program_type': 'gift_card'}</field>
+    <field name="domain">[('program_type', 'in', ('gift_card', 'ewallet'))]</field>
+</record>
+       <!-- client vip -->
+      <record id="view_partner_vip_form" model="ir.ui.view">
+    <field name="name">res.partner.vip.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <!-- On ajoute un nouveau groupe dans le formulaire pour les informations supplémentaires -->
+        <xpath expr="//form" position="inside">
+            <group>
+                <!-- Affichage du nom du client -->
+                <field name="name" readonly="1"/>
+
+                <!-- Affichage de l'email du client -->
+                <field name="email" readonly="1"/>
+
+                <!-- Affichage du total des achats du client -->
+                <field name="total_sales" readonly="1"/>
+
+                <!-- Affichage du statut VIP du client -->
+                <field name="is_vip" widget="boolean_toggle" readonly="1"/>
+            </group>
+        </xpath>
+    </field>
+</record>
+
+<record id="view_partner_vip_tree" model="ir.ui.view">
+    <field name="name">res.partner.vip.tree</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree"/>
+    <field name="arch" type="xml">
+        <xpath expr="//tree" position="inside">
+            <field name="total_sales"/>
+            <field name="is_vip"/>
+        </xpath>
+    </field>
+</record>
+
+<record id="action_partner_vip" model="ir.actions.act_window">
+    <field name="name">Clients VIP</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+</record>
+
+  </odoo>

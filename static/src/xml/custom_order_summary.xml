@@ -1,0 +1,11 @@
+<templates xml:space="preserve">
+    <t t-name="custom_discount.OrderSummaryPatch" t-inherit="point_of_sale.OrderSummary" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@class, 'order-summary')]" position="inside">
+            <t t-if="props.order.get_remise_par_carte() > 0">
+                <div class="text-success mt-2 ms-2 custom-global-discount">
+                    <small><i>🎁 Remise carte appliquée : <t t-esc="props.order.get_remise_par_carte()"/>%</i></small>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,48 @@
+<odoo>
+
+        <template id="cart_loyalty_system" inherit_id="website_sale.cart_lines">
+            <!-- Insertion dans le conteneur principal -->
+            <xpath expr="//div[@id='cart_products']" position="inside">
+                <div t-component="CartLoyaltyDiscount"/>
+            </xpath>
+
+            <!-- Gestion des événements -->
+            <xpath  expr="//input[contains(@class, 'js_quantity')]" position="attributes">
+                <attribute name="t-on-change">updateDiscounts</attribute>
+            </xpath>
+        </template>
+        <!-- Template pour injecter l'affichage des informations de fidélité dans chaque ligne du panier -->
+        <template id="cart_lines_inherit" inherit_id="website_sale.cart_lines" name="Custom Cart Lines">
+            <xpath expr="//div[hasclass('flex-grow-1')]" position="inside">
+                <t t-set="loyalty_info" t-value="line._get_loyalty_info()"/>
+                <t t-component="CartLoyaltyDiscount"/>
+                <div t-if="loyalty_info and loyalty_info.get('best_program', False)"
+                     class="loyalty-card-info mt-2 p-2 bg-light rounded">
+                    <div class="d-flex justify-content-between">
+                        <small class="text-primary">
+                            <i class="fa fa-credit-card me-1"></i>
+                            <t t-esc="loyalty_info.get('card_name', 'Carte de réduction')"/>
+                        </small>
+                        <small class="text-success fw-bold">
+                            <t t-esc="loyalty_info.get('max_discount', 0)"/>%
+                        </small>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                        <small class="text-muted">
+                            <i class="fa fa-tags me-1"></i>
+                            <t t-esc="loyalty_info['best_program'].name"/>
+                        </small>
+                        <small class="text-warning">
+                            <t t-esc="loyalty_info.get('reward_description', 'Récompense appliquée')"/>
+                        </small>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+
+
+</odoo>
+
+
+

@@ -1,0 +1,92 @@
+<odoo>
+    <record id="view_cartes_reduction_static_kanban" model="ir.ui.view">
+        <field name="name">cartes.reduction.static.kanban</field>
+        <field name="model">cartes.reduction.info</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard" sample="1" no_create="1" no_edit="1" no_quick_create="1">
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center;">                            <!-- Carte 1 : Création de cartes -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/create_card.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Créer une Carte</strong>
+                                    <p>Créez des cartes de réduction personnalisées selon le type de client, la période ou la stratégie commerciale.</p>
+                                </div>
+                            </div>
+
+                            <!-- Carte 2 : Bénéficier des promotions -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/promo_benefit.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Bénéficier des Promotions</strong>
+                                    <p>Les clients peuvent appliquer automatiquement leurs réductions lors de l'achat si les conditions sont remplies.</p>
+                                </div>
+                            </div>
+
+                            <!-- Carte 3 : Renouvellement des cartes -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/renew_card.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Renouvellement des Cartes</strong>
+                                    <p>Un assistant permet de renouveler une carte expirée ou de prolonger sa validité facilement.</p>
+                                </div>
+                            </div>
+
+                            <!-- Carte 4 : Générer les règles d'association -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/association_rules.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Règles d'Association</strong>
+                                    <p>Définissez dynamiquement les conditions d'utilisation des cartes selon les produits, clients ou périodes.</p>
+                                </div>
+                            </div>
+
+                            <!-- Carte 5 : Comportement d'achat client -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/customer_behavior.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Comportement d'Achat</strong>
+                                    <p>Analysez le comportement des clients pour proposer des réductions ciblées et personnalisées.</p>
+                                </div>
+                            </div>
+
+                            <!-- Carte 6 : Intégration POS -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/pos_integration.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Intégration Point de Vente</strong>
+                                    <p>Les cartes s'intègrent dans le POS pour appliquer automatiquement les réductions au moment de la vente.</p>
+                                </div>
+                            </div>
+
+                            <!-- Carte 7 : Intégration Site Web -->
+                            <div class="o_kanban_record bg-white m-2" style="width: 250px; height: 250px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div class="o_kanban_image">
+                                    <img src="/cartes_reduction/static/img/website_integration.png" width="64" height="64"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>Intégration Site Web</strong>
+                                    <p>Les réductions sont utilisables sur le site e-commerce d'Odoo via les cartes ou codes promos liés.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

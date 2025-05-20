@@ -1,0 +1,18 @@
+<odoo>
+    <!-- Catégorie de module pour les groupes -->
+    <record id="cartes_category" model="ir.module.category">
+        <field name="name">Gestion des Cartes</field>
+    </record>
+
+    <!-- Groupe Manager -->
+    <record id="cartes_manager_group" model="res.groups">
+        <field name="name">Cartes Manager</field>
+        <field name="category_id" ref="cartes_reduction.cartes_category"/>
+    </record>
+
+    <!-- Groupe User -->
+    <record id="cartes_user_group" model="res.groups">
+        <field name="name">Cartes User</field>
+        <field name="category_id" ref="cartes_reduction.cartes_category"/>
+    </record>
+</odoo>

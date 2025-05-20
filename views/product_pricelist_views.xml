@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Héritage de la vue Search -->
+        <record id="product_pricelist_item_view_search_inherit" model="ir.ui.view">
+            <field name="name">product.pricelist.item.search.inherit</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_view_search"/>
+            <field name="arch" type="xml">
+                <!-- Ajout d'un champ dans la recherche -->
+                <xpath expr="//search" position="inside">
+                    <field name="some_field"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Héritage de la vue Tree (Liste des règles de prix) -->
+        <record id="product_pricelist_item_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product.pricelist.item.tree.inherit</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
+            <field name="arch" type="xml">
+                <!-- Modification de l'affichage pour ajouter un champ -->
+                <xpath expr="//tree" position="inside">
+                    <field name="some_field"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Action pour afficher la liste des règles de prix -->
+        <record id="action_product_pricelist_item_tree" model="ir.actions.act_window">
+            <field name="name">Price Rules</field>
+            <field name="res_model">product.pricelist.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- Action pour afficher et créer un nouvel enregistrement de règles de tarification -->
+        <record id="action_product_pricelist" model="ir.actions.act_window">
+            <field name="name">Règles de Tarification et Réductions</field>
+            <field name="res_model">product.pricelist</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_pricelist_view_inherit_cartes_reduction"/>
+            <field name="target">current</field>
+            <field name="context">
+                {"default_state": "draft", "default_carte_reduction_id": False} <!-- Valeurs par défaut pour un nouvel enregistrement -->
+            </field>
+        </record>
+
+        <!-- Héritage de la vue Form de Product Pricelist pour ajouter les cartes de réduction -->
+        <record id="product_pricelist_view_inherit_cartes_reduction" model="ir.ui.view">
+            <field name="name">product.pricelist.form.inherit.cartes.reduction</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+                <!-- Ajouter un champ personnalisé après le champ 'company_id' -->
+                <field name="company_id" position="after">
+                    <field name="carte_reduction_id" string="Carte de Réduction" widget="many2one"
+                           domain="[('state', '=', 'active')]"/>
+                </field>
+
+                <!-- Modifier le libellé de la page 'Price Rules' -->
+                <page name="pricelist_rules" position="attributes">
+                    <attribute name="string">Règles de Tarification et Réductions</attribute>
+                </page>
+
+                <!-- Ajouter un nouvel onglet "Réductions Spéciales" -->
+                <notebook position="inside">
+                    <page string="Réductions Spéciales">
+                        <group>
+                            <field name="special_discount" string="Remise Spéciale (%)"/>
+                            <field name="validity_period" string="Période de Validité"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</odoo>

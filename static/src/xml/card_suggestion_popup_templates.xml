@@ -1,0 +1,23 @@
+<templates id="template" xml:space="preserve">
+    <t t-name="cartes_reduction.CardSuggestionPopup" owl="1">
+        <div class="popup popup-card-suggestion">
+            <div class="popup-title">
+                <t t-esc="props.title"/>
+            </div>
+            <div class="popup-body">
+                <p t-esc="props.body"/>
+            </div>
+            <div class="popup-footer">
+                <button class="btn btn-primary" t-on-click="confirm">
+                    <t t-esc="props.confirmText"/>
+                </button>
+                <button class="btn btn-secondary" t-on-click="cancel">
+                    <t t-esc="props.cancelText"/>
+                </button>
+            </div>
+        </div>
+    </t>
+</templates>
+
+
+

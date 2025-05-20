@@ -1,0 +1,247 @@
+ <odoo>
+<record id="view_form_carte_reduction" model="ir.ui.view">
+    <field name="name">cartes.reduction.form</field>
+    <field name="model">cartes.reduction</field>
+    <field name="arch" type="xml">
+        <form string="Carte de Réduction">
+            <sheet>
+                <group>
+                    <!-- Champ Nom de la carte -->
+                    <field name="name" string="Nom de la Carte" required="True"/>
+
+                    <!-- Type de Carte -->
+                    <field name="carte_type" string="Type de Carte"/>
+
+                    <!-- Remise de bienvenue -->
+                    <field name="discount" string="Remise de Bienvenue (%)"/>
+
+                    <!-- Logo de la Carte -->
+                    <field name="logo" string="Logo de la Carte"/>
+
+
+                    <field name="nombre_utilisateurs_max" string="Nombre d'Utilisateurs Permis" />
+                    <field name="conditions_ids" widget="many2many_tags" options="{'no_create': false}"  string="Conditions d'Obtention" />
+                    <field name="loyalty_program_id" options="{'no_create_edit': False}" context="{'default_active': True}" />
+
+                    <field name="active" string="Active"/>
+                </group>
+            </sheet>
+
+
+
+        </form>
+    </field>
+</record>
+
+<!-- Action pour ouvrir le formulaire -->
+<record id="action_creer_carte" model="ir.actions.act_window">
+    <field name="name">Créer une nouvelle carte</field>
+    <field name="res_model">cartes.reduction</field>
+    <field name="view_mode">form</field>
+</record>
+
+
+ <!-- Vue en liste des cartes de réduction -->
+<record id="view_cartes_reduction_tree" model="ir.ui.view">
+    <field name="name">cartes.reduction.tree</field>
+    <field name="model">cartes.reduction</field>
+    <field name="arch" type="xml">
+        <tree string="Cartes de Réduction">
+            <field name="name"/>  <!-- Nom de la carte -->
+            <field name="logo" widget="image" class="img-thumbnail"/>
+
+            <field name="carte_type"/>  <!-- Type de carte -->
+            <field name="conditions_ids" widget="many2many_tags" options="{'no_create': True}"  string="Conditions d'Obtention" />
+            <field name="loyalty_program_id" widget="many2many_tags" options="{'no_create': True}"  string="progde fidelité" />
+            <field name="nombre_utilisateurs_max"/>  <!-- Nombre de clients -->
+            <field name="nombre_utilisateurs"/>
+            <field name="discount"/>  <!-- Points de récompense de bienvenue -->
+            <field name="active"/>  <!-- Statut actif/inactif -->
+
+        </tree>
+    </field>
+</record>
+
+<!-- Action pour afficher la liste des cartes -->
+<record id="action_lister_cartes" model="ir.actions.act_window">
+    <field name="name">Cartes de Réduction Disponibles</field>
+    <field name="res_model">cartes.reduction</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            Cliquez sur "Créer" pour ajouter une nouvelle carte.
+        </p>
+    </field>
+</record>
+
+<record id="view_form_attribution_carte" model="ir.ui.view">
+    <field name="name">cartes.attribution.form</field>
+    <field name="model">cartes.attribution</field>
+    <field name="arch" type="xml">
+        <form string="Attribuer une Carte">
+            <header>
+                <button name="action_cartes_attribution_list" type="object" string="Liste des clients" class="oe_highlight"/>
+            </header>
+            <sheet>
+                <!-- Sélection du client -->
+                <group>
+                    <field name="client_id" string="Client" required="True"/>
+
+                    <field name="client_name" string="Nom" readonly="True"/>
+                    <field name="client_num_telephone" string="Numéro de Téléphone" readonly="True"/>
+                    <field name="client_email" string="Email" readonly="True"/>
+                </group>
+
+                <!-- Choisir la carte de réduction -->
+                <group>
+                    <field name="carte_ids" string="Cartes de Réduction" widget="many2many_tags" required="True"/>
+                    <field name="state" />
+                </group>
+
+                <!-- Dates -->
+                <group>
+                    <field name="date_attribution" string="Date d'Attribution" required="True"/>
+                    <field name="date_expiration" string="Date d'Expiration" required="True"/>
+                </group>
+
+
+                <!-- Boutons -->
+                <footer>
+                    <button string="Attribuer" type="object" name="action_attribuer" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <!-- Action pour ouvrir le formulaire -->
+    <record id="action_attribuer_carte" model="ir.actions.act_window">
+        <field name="name">Attribuer une carte</field>
+        <field name="res_model">cartes.attribution</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_form_attribution_carte"/>
+    </record>
+               <!-- Vue de liste des clients avec les cartes -->
+        <record id="view_client_list" model="ir.ui.view">
+            <field name="name">client.list.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des Clients">
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="carte_ids" widget="many2many_tags" options="{'no_create': True}" string="Cartes de Réduction" domain="[('client_id', '=', parent.id)]"/>
+                 </tree>
+            </field>
+
+        </record>
+
+        <!-- Vue Formulaire des Clients -->
+        <record id="view_form_res_partner" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Client">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="carte_ids" widget="many2many_tags" string="Cartes de Réduction"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+     <record id="view_cartes_attribution_tree" model="ir.ui.view">
+        <field name="name">cartes.attribution.tree</field>
+        <field name="model">cartes.attribution</field>
+        <field name="arch" type="xml">
+            <tree string="Attributions de Cartes">
+                <field name="client_id"/>
+                <field name="client_num_telephone"/>
+                <field name="client_email"/>
+                <field name="carte_ids" widget="many2many_tags"/>
+                <field name="date_attribution"/>
+                <field name="date_expiration"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+     <record id="action_cartes_attribution_list" model="ir.actions.act_window">
+    <field name="name">Attributions de Cartes</field>
+    <field name="res_model">cartes.attribution</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<!-- renouvellement une carte -->
+
+<record id="action_renouveler_carte" model="ir.actions.act_window">
+    <field name="name">Cartes Expirées à Renouveler</field>
+    <field name="res_model">cartes.attribution</field>
+    <field name="view_mode">tree</field>
+    <field name="domain">[('date_expiration', '&lt;', context_today())]</field>
+</record>
+
+<record id="view_cartes_expirees_tree" model="ir.ui.view">
+    <field name="name">cartes.attribution.expirees.tree</field>
+    <field name="model">cartes.attribution</field>
+    <field name="arch" type="xml">
+        <tree string="Cartes Expirées">
+            <field name="client_id"/>
+            <field name="carte_ids"/>
+            <field name="date_attribution"/>
+            <field name="date_expiration"/>
+            <field name="state"/>
+            <button name="action_ouvrir_wizard_renouvellement" string="Renouveler" type="object" class="btn-primary"/>
+        </tree>
+    </field>
+</record>
+<record id="view_form_renouveler_carte" model="ir.ui.view">
+    <field name="name">cartes.attribution.renouveler.form</field>
+    <field name="model">cartes.attribution</field>
+    <field name="arch" type="xml">
+        <form string="Renouveler une Carte">
+            <sheet>
+                <group>
+                    <!-- Informations sur le client -->
+                    <field name="client_id" string="Client" readonly="True"/>
+                    <field name="carte_ids" string="Cartes de Réduction" readonly="True"/>
+                    <field name="date_attribution" string="Date d'Attribution" readonly="True"/>
+
+                    <!-- Nouvelle date d'expiration -->
+                    <field name="date_expiration" string="Nouvelle Date d'Expiration" required="True"/>
+
+                    <field name="state" string="Statut"/>
+                </group>
+            </sheet>
+
+            <!-- Boutons -->
+            <footer>
+                <button string="Renouveler" type="object" name="action_renouveler" class="btn-primary"/>
+                <button string="Annuler" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+    <record id="view_wizard_renouvellement_form" model="ir.ui.view">
+    <field name="name">wizard.renouvellement.form</field>
+    <field name="model">wizard.renouvellement.carte</field>
+    <field name="arch" type="xml">
+        <form string="Renouveler Carte">
+            <group>
+                <field name="client_id" readonly="1"/>
+                <field name="carte_ids" readonly="1"/>
+                <field name="date_expiration" required="1"/>
+            </group>
+            <footer>
+                <button string="Confirmer" type="object" name="action_renouveler" class="btn-primary"/>
+                <button string="Annuler" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+</odoo>
+
+

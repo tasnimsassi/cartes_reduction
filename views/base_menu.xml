@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!-- menu principal pour accéder à l'action -->
+<menuitem id="menu_cartes_reduction" name="Cartes de Réduction" sequence="1" action="action_cartes_reduction_image"/>
+<record id="action_cartes_reduction_image" model="ir.actions.act_window">
+        <field name="name">Aperçu des Cartes</field>
+        <field name="res_model">cartes.reduction.info</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_cartes_reduction_static_kanban"/>
+        <field name="help" type="html">
+            <p>Découvrez nos différents programmes de réduction.</p>
+        </field>
+</record>
+
+
+    <!-- Menu sous Gestion des Cartes -->
+    <menuitem id="menu_gestion_cartes" name="Gestion des Cartes" parent="menu_cartes_reduction" sequence="10"/>
+    <menuitem id="menu_creer_carte" name="Créer une nouvelle carte" parent="menu_gestion_cartes" action="action_creer_carte" sequence="10"/>
+    <menuitem id="menu_lister_cartes" name="Lister les cartes disponibles" parent="menu_gestion_cartes" action="action_lister_cartes" sequence="20"/>
+    <menuitem id="menu_attribuer_carte" name="Attribuer une carte à un client" parent="menu_gestion_cartes" action="action_cartes_attribution_list" sequence="30"/>
+    <menuitem id="menu_renouveler_carte" name="Renouveler une carte expirée" parent="menu_gestion_cartes" action="action_renouveler_carte" sequence="40"/>
+
+    <!-- Menu Gestion des Promotions  -->
+    <menuitem id="menu_promotions" name="Gestion des Promotions" parent="menu_cartes_reduction" sequence="20"/>
+    <menuitem id="menu_ajouter_promotion" name="Ajouter une promotion" parent="menu_promotions" action="action_loyalty_program" sequence="10"/>
+    <menuitem id="menu_gestion_reductions" name="Associations de Produits" parent="menu_promotions" action="action_product_association"  sequence="20"/>
+    <menuitem id="menu_promotions_en_cours" name="Voir les promotions en cours" parent="menu_promotions" action="action_product_pricelist_item_tree" sequence="30"/>
+    <menuitem id="menu_planifier_promotions" name="Planifier des promotions futures" parent="menu_promotions" action="action_product_pricelist" sequence="40"/>
+
+    <!-- Menu Fidélité Clients -->
+    <menuitem id="menu_fidelite_clients" name="Fidélité Clients" parent="menu_cartes_reduction" sequence="30"/>
+    <menuitem id="menu_gestion_points" name="Gérer les points de fidélité" parent="menu_fidelite_clients" action="action_gestion_points" sequence="10"/>
+    <menuitem id="menu_consulter_historique_achats" name="liste des cartes" parent="menu_fidelite_clients" action="action_loyalty_program_view_tree" sequence="20"/>
+    <menuitem id="menu_echanger_points" name="generer les regles" parent="menu_fidelite_clients" action="action_product_association_generator" sequence="30"/>
+    <menuitem id="menu_identification_vip" name="Identifier les clients VIP" parent="menu_fidelite_clients" action="action_partner_vip" sequence="40"/>
+
+    <!-- Menu Notifications et Alertes -->
+    <menuitem id="menu_notifications_alertes" name="Notifications et Alertes" parent="menu_cartes_reduction" sequence="40"/>
+    <menuitem id="menu_rappels_automatiques" name="Rappels automatiques" parent="menu_notifications_alertes" action="action_rappels_automatiques" sequence="10"/>
+    <menuitem id="menu_notifications_clients" name="Notifications clients" parent="menu_notifications_alertes" action="action_notification_client" sequence="20"/>
+    <menuitem id="menu_alertes_cartes_inactives" name="Alerte sur les cartes inactives" parent="menu_notifications_alertes" action="action_alertes_cartes_inactives" sequence="30"/>
+    <menuitem id="menu_envoi_newsletters" name="scomportement d'achat client" parent="menu_notifications_alertes" action="action_customer_behavior_dashboard" sequence="40"/>
+
+    <!-- Menu Rapports et Analyses -->
+    <menuitem id="menu_rapports_analyses" name="Rapports et Analyses" parent="menu_cartes_reduction" sequence="50"/>
+    <menuitem id="menu_voir_statistiques_utilisation" name="Voir les statistiques d’utilisation" parent="menu_rapports_analyses" action="action_dashboard_vente_graph" sequence="10"/>
+    <menuitem id="menu_exporter_donnees" name="Exporter les données" parent="menu_rapports_analyses" action="action_dashboard_product_sales_graph" sequence="20"/>
+    <menuitem id="menu_analyse_tendances" name="Analyse des tendances de consommation" parent="menu_rapports_analyses" action="action_dashboard_purchase_by_customer" sequence="30"/>
+    <menuitem id="menu_utilisation_cartes" name="Statistique des cartes" parent="menu_rapports_analyses"  action="action_carte_usage_stats"  sequence="30"/>
+
+</odoo>
+
+

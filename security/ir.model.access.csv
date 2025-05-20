@@ -1,0 +1,42 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cartes_reduction,access.cartes.reduction,model_cartes_reduction,,1,1,1,1
+access_fidelite_client,access.fidelite.client,model_fidelite_client,,1,1,1,1
+access_notifications_client,access.notifications.client,model_notifications_client,,1,1,1,1
+access_cartes_promotions,access.cartes.promotions,model_cartes_promotions,,1,1,1,1
+access_rapports_usage,access.rapports.usage,model_rapports_usage,,1,1,1,1
+access_website_user,access.website.user,website.model_website,,1,1,1,1
+access_sale_order_line_user,sale.order.line (User),model_sale_order_line,,1,1,1,1
+access_dashboard_vente,access_dashboard_vente,model_dashboard_vente,,1,1,1,1
+access_dashboard_product_sales,dashboard.product.sales,model_dashboard_product_sales,,1,1,1,1
+access_dashboard_purchase_by_customer_user,dashboard.purchase.by.customer,model_dashboard_purchase_by_customer,,1,1,1,1
+access_carte_usage_stats,access.carte.usage.stats,model_carte_usage_stats,,1,1,1,1
+
+
+access_cartes_conditions,access.cartes.conditions,model_cartes_conditions,,1,1,1,1
+access_cartes_reduction_info,access.cartes.reduction.info,model_cartes_reduction_info,,1,1,1,1
+
+access_cartes_client,access.cartes.client,model_cartes_client,,1,1,1,1
+access_cartes_attribution,access.cartes.attribution,model_cartes_attribution,,1,1,1,1
+
+access_loyalty_card,access_loyalty_card,model_loyalty_card,,1,1,1,1
+access_loyalty_mail,access_loyalty_mail,model_loyalty_mail,,,1,1,1,1
+access_loyalty_program,access_loyalty_program,model_loyalty_program,,,1,1,1,1
+access_loyalty_reward,access_loyalty_reward,model_loyalty_reward,,,1,1,1,1
+access_loyalty_rule,access_loyalty_rule,model_loyalty_rule,,,1,1,1,1
+access_product_pricelist,product.pricelist,model_product_pricelist,,,1,1,1
+access_product_pricelist_item,access_product_pricelist_item,model_product_pricelist_item,,,1,1,1
+access_res_partner_user,access_res_partner_user,model_res_partner,,1,1,1,1
+access_wizard_renouvellement,Access Wizard Renouvellement,model_wizard_renouvellement_carte,,1,1,1,1
+access_pos_session,Access PosSession,model_pos_session,base.group_user,,1,1,1,1
+access_sale_order,Access Sale Order,model_sale_order,base.group_user,,1,1,1,1
+access_reward_selection_wizard,reward.selection.wizard,model_reward_selection_wizard,,1,1,1,1
+access_promotion_rule,promotion.rule,model_promotion_rule,,1,1,1,1
+access_customer_ml_cron,access.customer.ml.cron,model_customer_ml_cron,,1,1,1,1
+access_product_association,product.association,model_product_association,,1,1,1,1
+access_product_association_generator_user,access.product.association.generator.user,model_product_association_generator,,1,1,1,1
+access_sale_product_suggestion_wizard,sale.product.suggestion.wizard,model_sale_product_suggestion_wizard,,1,1,1,1
+
+
+access_cartes_manager,access_cartes_manager,model_cartes_reduction,cartes_reduction.cartes_manager_group,1,1,1,1
+
+access_cartes_user,access_cartes_user,model_cartes_reduction,cartes_reduction.cartes_user_group,1,1,1,1

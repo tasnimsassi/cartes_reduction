@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Héritage de la vue sans modification -->
+        <record id="loyalty_program_view_form_inherit" model="ir.ui.view">
+            <field name="name">loyalty.program.view.form.inherit</field>
+            <field name="model">loyalty.program</field>
+            <field name="inherit_id" ref="loyalty.loyalty_program_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Exemple d'ajout d'un champ dans la vue héritée -->
+                <xpath expr="//form//sheet//group" position="inside">
+                    <field name="new_field"/>
+                </xpath>
+            </field>
+        </record>
+
+
+ <!-- Héritage de la vue 'loyalty_program_gift_ewallet_view_form' -->
+    <record id="my_custom_gift_ewallet_view_form" model="ir.ui.view">
+        <field name="name">my.custom.gift.ewallet.view.form</field>
+        <field name="model">loyalty.program</field>
+        <field name="inherit_id" ref="loyalty.loyalty_program_gift_ewallet_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Exemple de modification : ajout d'un champ -->
+            <xpath expr="//form/sheet/group" position="inside">
+                <field name="new_field"/>
+            </xpath>
+        </field>
+    </record>
+
+ <record id="inherited_loyalty_card_view_form" model="ir.ui.view">
+    <field name="name">inherited.loyalty.card.view.form</field>
+    <field name="model">loyalty.card</field>
+    <field name="inherit_id" ref="loyalty.loyalty_card_view_form"/>  <!-- Référence à la vue à hériter -->
+    <field name="arch" type="xml">
+        <!-- Aucune modification ici, juste l'héritage de la vue existante -->
+        <!-- Exemple de modification : ajout d'un champ -->
+        <xpath expr="//form/sheet/group" position="inside">
+            <field name="new_field"/>
+        </xpath>
+    </field>
+</record>
+
+<record id="loyalty_program_view_tree_inherit" model="ir.ui.view">
+            <field name="name">loyalty.program.tree.inherit</field>
+            <field name="model">loyalty.program</field>
+            <field name="inherit_id" ref="loyalty.loyalty_program_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="new_field"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+</odoo>
+
