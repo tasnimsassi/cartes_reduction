@@ -8,11 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/tasnimsassi/cartes_reduction.git'
-            }
-        }
+
 
         stage('Deploy module') {
             steps {
