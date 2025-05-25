@@ -12,11 +12,10 @@ pipeline {
 
         stage('Deploy module') {
             steps {
-                echo "Copie du module dans le dossier extra-addons local..."
-                sh """
-                    rm -rf ${EXTRA_ADDONS_HOST_PATH}/${MODULE_NAME}
-                    cp -r . ${EXTRA_ADDONS_HOST_PATH}/${MODULE_NAME}
-                """
+                echo 'Copie du module dans le conteneur Docker Odoo...'
+                sh '''
+                    docker cp . odoo_docker_odoo_1:/mnt/extra-addons/cartes_reduction
+                '''
             }
         }
 
