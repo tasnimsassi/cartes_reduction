@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 <!-- menu principal pour accéder à l'action -->
-<menuitem id="menu_cartes_reduction" name="Cartes de Réduction" sequence="1" action="action_cartes_reduction_image"/>
-<record id="action_cartes_reduction_image" model="ir.actions.act_window">
-        <field name="name">Aperçu des Cartes</field>
-        <field name="res_model">cartes.reduction.info</field>
-        <field name="view_mode">kanban</field>
-        <field name="view_id" ref="view_cartes_reduction_static_kanban"/>
-        <field name="help" type="html">
-            <p>Découvrez nos différents programmes de réduction.</p>
-        </field>
-</record>
+<menuitem id="menu_cartes_reduction" name="Cartes de Réduction" sequence="1" />
+
 
 
     <!-- Menu sous Gestion des Cartes -->
