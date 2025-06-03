@@ -14,7 +14,7 @@
 
     <!-- Menu Gestion des Promotions  -->
     <menuitem id="menu_promotions" name="Gestion des Promo" parent="menu_cartes_reduction" sequence="20"/>
-    <menuitem id="menu_ajouter_promotion" name="Ajouter une promotion" parent="menu_promotions" action="action_loyalty_program" sequence="10"/>
+    <menuitem id="menu_ajouter_promotion" name="Ajouter une promo" parent="menu_promotions" action="action_loyalty_program" sequence="10"/>
     <menuitem id="menu_gestion_reductions" name="Associations de Produits" parent="menu_promotions" action="action_product_association"  sequence="20"/>
     <menuitem id="menu_promotions_en_cours" name="Voir les promotions en cours" parent="menu_promotions" action="action_product_pricelist_item_tree" sequence="30"/>
     <menuitem id="menu_planifier_promotions" name="Planifier des promotions futures" parent="menu_promotions" action="action_product_pricelist" sequence="40"/>
