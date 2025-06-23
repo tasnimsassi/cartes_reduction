@@ -34,7 +34,7 @@ class ResPartner(models.Model):
         string="Commandes PoS"
     )
 
-    # Champs existants
+
     total_sales = fields.Monetary(
         string="Total des Achats",
         compute="_compute_total_sales",
