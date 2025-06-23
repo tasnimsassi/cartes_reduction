@@ -31,7 +31,7 @@
     <menuitem id="menu_rappels_automatiques" name="Rappels automatiques" parent="menu_notifications_alertes" action="action_rappels_automatiques" sequence="10"/>
     <menuitem id="menu_notifications_clients" name="Notifications clients" parent="menu_notifications_alertes" action="action_notification_client" sequence="20"/>
     <menuitem id="menu_alertes_cartes_inactives" name="Alerte sur les cartes inactives" parent="menu_notifications_alertes" action="action_alertes_cartes_inactives" sequence="30"/>
-    <menuitem id="menu_envoi_newsletters" name="scomportement d'achat client" parent="menu_notifications_alertes" action="action_customer_behavior_dashboard" sequence="40"/>
+    <menuitem id="menu_envoi_newsletters" name="comportement d'achat client" parent="menu_notifications_alertes" action="action_customer_behavior_dashboard" sequence="40"/>
 
     <!-- Menu Rapports et Analyses -->
     <menuitem id="menu_rapports_analyses" name="Rapports et Analyses" parent="menu_cartes_reduction" sequence="50"/>
