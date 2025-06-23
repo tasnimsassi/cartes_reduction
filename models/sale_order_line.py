@@ -80,7 +80,7 @@ class SaleOrderLine(models.Model):
 
     def _compute_price(self):
         for line in self:
-            # Ne PAS interférer si une remise globale est active
+
             if any(
                     line.loyalty_reward_id and
                     line.loyalty_reward_id.reward_type == 'order'
